@@ -5,7 +5,18 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const ImportShopzio = () => {
-  const [currentState, setCurrentState] = useState({ selectedFile: null, loaded: 0 });
+  let timer = null;
+  const [currentState, setCurrentState] = useState({
+    selectedFile: null,
+    loaded: 0,
+  });
+  const [orderId, setOrderId] = useState("");
+
+  React.useEffect(() => {
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
 
   const onSelect = (event) => {
     const file = event.target.files[0];
@@ -29,7 +40,17 @@ const ImportShopzio = () => {
       })
       .then((res) => {
         toast.success("upload success");
-        console.log(res);
+        document.getElementById("fileInputId").value = null;
+        timer = setTimeout(
+          () =>
+            setCurrentState((prev) => {
+              return {
+                ...prev,
+                loaded: 0,
+              };
+            }),
+          2000
+        );
       })
       .catch((err) => {
         toast.error("upload fail");
@@ -47,7 +68,7 @@ const ImportShopzio = () => {
       })
       .then((res) => {
         toast.success("upload success");
-        console.log(res);
+        setOrderId(res.data.orderId);
       })
       .catch((err) => {
         toast.error("upload fail");
@@ -60,7 +81,12 @@ const ImportShopzio = () => {
         <div className="offset-md-3 col-md-6">
           <div className="form-group files">
             <label>Upload Your File </label>
-            <input type="file" className="form-control" onChange={onSelect} />
+            <input
+              id="fileInputId"
+              type="file"
+              className="form-control"
+              onChange={onSelect}
+            />
           </div>
           <div className="form-group">
             <ToastContainer />
@@ -89,6 +115,7 @@ const ImportShopzio = () => {
               {Math.round(currentState.loaded, 2)}%
             </Progress>
           </div>
+          <div>Order Id that imported: {orderId}</div>
         </div>
       </div>
     </div>
