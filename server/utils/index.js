@@ -1,4 +1,5 @@
 const XLSX = require("xlsx");
+const fs = require("fs");
 
 const sheetToJson = (binaryString) => {
   let workbook = XLSX.read(binaryString, { type: "binary" });
@@ -8,6 +9,8 @@ const sheetToJson = (binaryString) => {
   let jsonObj = XLSX.utils.sheet_to_json(worksheet, {
     raw: true,
   });
+  let data = JSON.stringify(jsonObj);
+  fs.writeFileSync("productsList.json", data);
 
   return jsonObj;
 };
