@@ -2,5 +2,18 @@
     "cSpell.ignoreWords": [
         "shopzio",
         "toastify"
+    ],
+    "cSpell.words": [
+        "build",
+        "css",
+        "importshopzio",
+        "o",
+        "output",
+        "prebuild",
+        "prestart",
+        "src",
+        "tailwind",
+        "tailwindcss",
+        "tailwindcss build src tailwind css o output"
     ]
 }
