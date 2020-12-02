@@ -9,9 +9,12 @@ module.exports = {
         "3/4": "75%",
         print: "680px",
       },
+      minWidth: {
+        "1/4": "24%",
+      },
       height: {
         "1/4": "25%",
-        card: "315px",
+        card: "300px",
       },
       screens: {
         680: "680px",

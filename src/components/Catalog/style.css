@@ -12,6 +12,11 @@
   display: block;
 }
 
+img {
+  height: 150px !important;
+  width: 150px !important;
+}
+
 @media print {
   /* table {
     page-break-after: auto;

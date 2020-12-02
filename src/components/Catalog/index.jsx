@@ -91,15 +91,21 @@ const Catalog = () => {
           {showCatalog &&
             items &&
             items.map((item, index) => {
+              const imagePath = item["ImagePath"];
+              const correctPath = imagePath.replace(
+                "Z:",
+                "http://127.0.0.1:8080"
+              );
+              console.log(correctPath);
               return (
                 <div
-                  className="inline-block justify-center max-w-1/4 h-card relative shadow-md mb-6 ml-0.5 pl-1 pr-1"
+                  className="inline-block justify-center max-w-1/4 min-w-1/4 h-card relative mb-6 ml-0.5 pl-1 pr-1"
                   key={item["Part No"]}
                 >
                   <div className="flex flex-col h-full">
                     <img
                       className=" object-scale-down h-30 block"
-                      src={item["ImagePath"]}
+                      src={correctPath}
                       alt="step3"
                     />
                     <div className="text-lg font-base mt-2  text-center block">
@@ -114,47 +120,42 @@ const Catalog = () => {
                       {/* Conditional render for P1 and P3 or just P1 */}
                       {item["Sell 03"] !== 0 ? (
                         <>
-                          <div className="flex justify-between mt-0.5 ">
-                            <>
-                              <div className="special text-xs font-bold text-red-400">
-                                Show Special:
-                              </div>
-                              <div className="special text-xs font-bold text-red-400">
-                                ${item["Sell 01"]}
-                              </div>
-                            </>
-                          </div>
-                          <div className="flex justify-between mt-0.5 ">
-                            <div className="regular-price text-xs font-bold ">
-                              Regular:
-                            </div>
-                            <div className="regular-price text-xs font-bold ">
+                          <div className="text-center mt-0.5 ">
+                            <div className="regular-price text-sm font-bold ">
                               ${item["Sell 03"]}
                             </div>
                           </div>
+                          <div className="text-center mt-0.5 relative ">
+                            <>
+                              <div className="special text-base font-bold text-red-400 text-center ">
+                                ${item["Sell 01"]}
+                              </div>
+
+                              <div className="absolute left-0 bottom-2 text-xs font-bold text-red-400">
+                                Sale
+                              </div>
+                            </>
+                          </div>
                         </>
                       ) : (
-                        <div className="flex justify-between mt-0.5 ">
-                          <div className="regular-price text-xs font-bold ">
-                            Regular:
-                          </div>
-                          <div className="regular-price text-xs font-bold ">
+                        <div className="text-center mt-0.5 ">
+                          <div className="regular-price text-base font-bold ">
                             ${item["Sell 01"]}
                           </div>
                         </div>
                       )}
 
                       {/* Dimension */}
-                      <div className="flex justify-between mt-0.5 ">
-                        <div className=" text-xs  ">
-                          H:{item["Height (UDF)"]}
+                      <div className="flex justify-center align-items-center mt-0.5 ">
+                        <div className=" text-xs mr-2 ">
+                          {item["Height (UDF)"]}
                         </div>
-                        <div className=" text-xs  ">
-                          L:{item["Length (UDF)"]}
+                        <div className=" text-xs mr-2 ">x</div>
+                        <div className=" text-xs mr-2 ">
+                          {item["Length (UDF)"]}
                         </div>
-                        <div className=" text-xs  ">
-                          W:{item["Width (UDF)"]}
-                        </div>
+                        <div className=" text-xs mr-2 ">x</div>
+                        <div className=" text-xs  ">{item["Width (UDF)"]}</div>
                       </div>
                     </div>
                   </div>
