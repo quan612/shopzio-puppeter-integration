@@ -127,7 +127,7 @@ const Catalog = () => {
                           </div>
                           <div className="text-center mt-0.5 relative ">
                             <>
-                              <div className="special text-base font-bold text-red-400 text-center ">
+                              <div className="special text-base font-medium text-red-400 text-center ">
                                 ${item["Sell 01"]}
                               </div>
 
