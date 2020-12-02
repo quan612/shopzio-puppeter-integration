@@ -108,7 +108,7 @@ const Catalog = () => {
                       src={correctPath}
                       alt="step3"
                     />
-                    <div className="text-lg font-base mt-2  text-center block">
+                    <div className="text-md font-base mt-2 text-center block">
                       {item["Part No"]}
                     </div>
                     <div className="text-small text-gray-700 mt-2 block">
@@ -147,15 +147,21 @@ const Catalog = () => {
 
                       {/* Dimension */}
                       <div className="flex justify-center align-items-center mt-0.5 ">
-                        <div className=" text-xs mr-2 ">
-                          {item["Height (UDF)"]}
-                        </div>
-                        <div className=" text-xs mr-2 ">x</div>
-                        <div className=" text-xs mr-2 ">
-                          {item["Length (UDF)"]}
-                        </div>
-                        <div className=" text-xs mr-2 ">x</div>
-                        <div className=" text-xs  ">{item["Width (UDF)"]}</div>
+                        {item["Height (UDF)"] && (
+                          <>
+                            <div className=" text-xs mr-2 ">
+                              {item["Height (UDF)"]}
+                            </div>
+                            <div className=" text-xs mr-2 ">x</div>
+                            <div className=" text-xs mr-2 ">
+                              {item["Length (UDF)"]}
+                            </div>
+                            <div className=" text-xs mr-2 ">x</div>
+                            <div className=" text-xs  ">
+                              {item["Width (UDF)"]}
+                            </div>
+                          </>
+                        )}
                       </div>
                     </div>
                   </div>
