@@ -85,11 +85,11 @@ const Catalog = () => {
             items &&
             items.map((item, index) => {
               const imagePath = item["ImagePath"];
-              // const correctPath = imagePath.replace(
-              //   "Z:",
-              //   "http://127.0.0.1:8080"
-              // );
-              // console.log(correctPath);
+              const correctPath = imagePath.replace(
+                "Z:",
+                "http://127.0.0.1:8080"
+              );
+              console.log(correctPath);
               return (
                 <div
                   className="inline-block justify-center max-w-1/4 min-w-1/4 h-card relative mb-6 ml-0.5 pl-1 pr-1"
@@ -98,7 +98,7 @@ const Catalog = () => {
                   <div className="flex flex-col h-full">
                     <img
                       className=" object-scale-down h-30 block"
-                      src={imagePath}
+                      src={correctPath}
                       alt="step3"
                     />
                     <div className="text-sm font-base mt-2 text-center block part-number">
