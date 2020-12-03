@@ -1,9 +1,4 @@
-/* img {
-  page-break-before: auto;
-  page-break-after: always;
-  page-break-inside: avoid;
-  display: block;
-} */
+@import url("https://fonts.googleapis.com/css?family=Open+Sans&display=condensed");
 
 .page {
   /* page-break-before: always; */
@@ -17,23 +12,6 @@ img {
   width: 150px !important;
 }
 
-@media print {
-  /* table {
-    page-break-after: auto;
-  }
-  tr {
-    page-break-inside: avoid;
-    page-break-after: auto;
-  }
-  td {
-    page-break-inside: initial;
-    display: block;
-    page-break-after: auto;
-  }
-  thead {
-    display: table-header-group;
-  }
-  tfoot {
-    display: table-footer-group;
-  } */
+.part-number {
+  font-family: "Open Sans";
 }

@@ -1,14 +1,8 @@
 import React, { Component, useState } from "react";
 import axios from "axios";
-import productsList from "data/productsList.json";
-import img1 from "data/FMMW424G8085Q.jpg";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import "./style.css";
-
-const array = [1, 2];
 
 const Catalog = () => {
   const [showCatalog, setShowCatalog] = useState(false);
@@ -18,7 +12,6 @@ const Catalog = () => {
   });
 
   const onSelect = (event) => {
-    // document.getElementById("fileInputId").value = null;
     const file = event.target.files[0];
     setCurrentState({
       selectedFile: file,
@@ -87,7 +80,7 @@ const Catalog = () => {
             </button>
           </div>
         </div>
-        <div className=" page  h-full relative">
+        <div className=" page h-full relative">
           {showCatalog &&
             items &&
             items.map((item, index) => {
@@ -108,31 +101,29 @@ const Catalog = () => {
                       src={correctPath}
                       alt="step3"
                     />
-                    <div className="text-md font-base mt-2 text-center block">
+                    <div className="text-sm font-base mt-2 text-center block part-number">
                       {item["Part No"]}
                     </div>
-                    <div className="text-small text-gray-700 mt-2 block">
-                      {item["Description"]}
-                    </div>
 
-                    {/* Bottom */}
-                    <div className="flex flex-1 flex-col justify-end">
+                    {/* Price */}
+                    {/** flex-1 */}
+                    <div className="flex flex-col text-center">
                       {/* Conditional render for P1 and P3 or just P1 */}
                       {item["Sell 03"] !== 0 ? (
                         <>
-                          <div className="text-center mt-0.5 ">
-                            <div className="regular-price text-sm font-bold ">
+                          <div className="text-center mt-0.5 flex flex-row justify-center align-center">
+                            <div className=" text-sm font-medium">REG:</div>
+                            <div className="regular-price text-sm font-medium ">
                               ${item["Sell 03"]}
                             </div>
                           </div>
-                          <div className="text-center mt-0.5 relative ">
+                          <div className="text-center mt-0.5 flex flex-row justify-center align-center">
                             <>
-                              <div className="special text-base font-medium text-red-400 text-center ">
-                                ${item["Sell 01"]}
+                              <div className="text-base font-bold text-red-400 ">
+                                SALE:
                               </div>
-
-                              <div className="absolute left-0 bottom-2 text-xs font-bold text-red-400">
-                                Sale
+                              <div className="special text-base font-bold text-red-400 text-center ">
+                                ${item["Sell 01"]}
                               </div>
                             </>
                           </div>
@@ -144,7 +135,13 @@ const Catalog = () => {
                           </div>
                         </div>
                       )}
+                    </div>
 
+                    <div className="text-small text-gray-700 mt-2 block text-center">
+                      {item["Description"]}
+                    </div>
+
+                    <div>
                       {/* Dimension */}
                       <div className="flex justify-center align-items-center mt-0.5 ">
                         {item["Height (UDF)"] && (

@@ -6,17 +6,18 @@ const fs = require("fs");
 
 router.post("", async (req, res, next) => {
   try {
+    const options = req.body;
+
     let rawData = fs.readFileSync("productsList.json");
     if (!rawData) return res.status(412).send({ error: "No file found" });
+
     let productsList = JSON.parse(rawData);
-    let a = await puppeteer.puppeteerRun(productsList);
+    let result = await puppeteer.puppeteerRun(productsList, options);
     fs.unlinkSync("productsList.json");
-    return res.status(200).json(a);
+
+    return res.status(200).json(result);
   } catch (error) {
-    console.log(error);
-    return res.status(422).json({
-      message: `Error at post route for puppeteer: ${error}`,
-    });
+    return res.status(401).send(`Error at post route for puppeteer: ${error}`);
   }
 });
 

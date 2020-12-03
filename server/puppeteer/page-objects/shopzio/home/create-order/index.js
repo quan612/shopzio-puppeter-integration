@@ -64,7 +64,13 @@ class OrderPuppeteer {
     });
   }
 
-  async addToOrder(page, productsList) {
+  async addToOrder(page, productsList, options) {
+    if (options.removeBlankQty) {
+      productsList = productsList.filter((product) =>
+        product.hasOwnProperty("Order QTY")
+      );
+    }
+
     await page.evaluate(async () => {
       let a = document.getElementById("btnAddNewRow");
       a.click();
@@ -72,34 +78,40 @@ class OrderPuppeteer {
 
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
+    let productNumber;
     // loop is here
     for (let product of productsList) {
-      // qty
-      // await page.evaluate(async () => {
-      //   let qtyTextBox = document.getElementById("Qty");
-      //   qtyTextBox.value = "1";
-      // });
+      try {
+        // qty
+        await page.evaluate(async () => {
+          let qtyTextBox = document.getElementById("Qty");
+          if (product.hasOwnProperty("Order QTY"))
+            qtyTextBox.value = product["Order QTY"];
+          else qtyTextBox.value = "1";
+        });
 
-      //item id
-      let productNumber = product.PartNumber;
-      await page.type("input[id='ItemID']", productNumber, { delay: 300 });
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      await page.keyboard.press("ArrowDown");
-      let anotherDropDown = await page.$x("//ul[@id='ui-id-2']");
-      anotherDropDown[0].click();
+        //item id
+        productNumber = product["Part#"];
+        await page.type("input[id='ItemID']", productNumber, { delay: 500 });
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        await page.keyboard.press("ArrowDown");
+        let anotherDropDown = await page.$x("//ul[@id='ui-id-2']");
+        await anotherDropDown[0].click();
+        await new Promise((resolve) => setTimeout(resolve, 2000));
 
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      // click on add item
-      let addItemButton = await page.$x("//button[@id='save']");
-      addItemButton[0].click();
-      await new Promise((resolve) => setTimeout(resolve, 2100));
+        // click on add item
+        let addItemButton = await page.$x("//button[@id='save']");
+        addItemButton[0].click();
+        await new Promise((resolve) => setTimeout(resolve, 2100));
+      } catch (error) {
+        throw "Error at product: " + productNumber;
+      }
     }
 
-    // await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     // end loop
     let closeModalBtn = await page.$x("//button[@class='close']");
     closeModalBtn[0].click();
-    // await new Promise((resolve) => setTimeout(resolve, 2000));
   }
 
   async getOrderNumber(page) {

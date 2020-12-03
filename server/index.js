@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 8000;
 const app = express();
 
 app.use(cors());
+app.use(bodyParser.json());
 
 //routes
 const fileUploadRoutes = require("./routes/file-upload");
