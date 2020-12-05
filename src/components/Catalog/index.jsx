@@ -112,17 +112,17 @@ const Catalog = () => {
                       {item["Sell 03"] !== 0 ? (
                         <>
                           <div className="text-center mt-0.5 flex flex-row justify-center align-center">
-                            <div className=" text-sm font-medium">REG:</div>
-                            <div className="regular-price text-sm font-medium ">
+                            <div className=" text-sm font-normal">REG:</div>
+                            <div className="regular-price text-sm font-normal">
                               ${item["Sell 03"]}
                             </div>
                           </div>
                           <div className="text-center mt-0.5 flex flex-row justify-center align-center">
                             <>
-                              <div className="text-base font-bold text-red-400 ">
+                              <div className="text-base font-extrabold text-red-600 ">
                                 SALE:
                               </div>
-                              <div className="special text-base font-bold text-red-400 text-center ">
+                              <div className="special text-base font-extrabold text-red-600 text-center ">
                                 ${item["Sell 01"]}
                               </div>
                             </>
