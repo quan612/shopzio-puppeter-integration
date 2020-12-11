@@ -114,17 +114,17 @@ const Catalog = () => {
                           <div className="text-center mt-0.5 flex flex-row justify-center align-center">
                             <div className=" text-sm font-normal">REG:</div>
                             &nbsp;
-                            <div className="regular-price text-sm font-normal">
+                            <div className="text-sm font-normal text-center">
                               ${item["Sell 03"]}
                             </div>
                           </div>
                           <div className="text-center mt-0.5 flex flex-row justify-center align-center">
                             <>
-                              <div className="text-base font-extrabold text-red-700 ">
+                              <div className="text-base font-bold text-red-700 ">
                                 SALE:
                               </div>
                               &nbsp;
-                              <div className="special text-base font-extrabold text-red-700 text-center ">
+                              <div className="text-base font-bold text-red-700 text-center ">
                                 ${item["Sell 01"]}
                               </div>
                             </>
@@ -132,7 +132,7 @@ const Catalog = () => {
                         </>
                       ) : (
                         <div className="text-center mt-0.5 ">
-                          <div className="regular-price text-base font-bold ">
+                          <div className="text-base font-bold ">
                             ${item["Sell 01"]}
                           </div>
                         </div>
