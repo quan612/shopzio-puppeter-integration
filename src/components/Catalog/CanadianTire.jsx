@@ -7,8 +7,8 @@ const CanadianTire = ({ items }) => {
   return (
     <>
       {items.map((item, index) => {
-        const imagePath = item["ImagePath"];
-        const correctPath = imagePath.replace("Z:", "http://127.0.0.1:8080");
+        // const imagePath = item["ImagePath"];
+        // const correctPath = imagePath.replace("Z:", "http://127.0.0.1:8080");
 
         return (
           <div
@@ -18,7 +18,7 @@ const CanadianTire = ({ items }) => {
             <div className="flex flex-col h-full">
               <img
                 className=" object-scale-down h-30 block"
-                src={correctPath}
+                src="https://via.placeholder.com/150"
                 alt="https://via.placeholder.com/150"
               />
               <div className="text-sm font-base mt-2 text-center block part-number">
