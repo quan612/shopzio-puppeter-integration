@@ -18,9 +18,8 @@ const CanadianTire = ({ items }) => {
             <div className="flex flex-col h-full">
               <img
                 className=" object-scale-down h-30 block"
-                // src={correctPath}
-                src="https://via.placeholder.com/150"
-                alt="step3"
+                src={correctPath}
+                alt="https://via.placeholder.com/150"
               />
               <div className="text-sm font-base mt-2 text-center block part-number">
                 {item["Part No"]}
@@ -38,7 +37,7 @@ const CanadianTire = ({ items }) => {
 
               {/* Canadian Tire Number */}
               <div className="text-base text-gray-700 mt-2 block text-center">
-                CDN:{item["Canadian Tire Part Number (UDF)"]}
+                CT#:{item["Canadian Tire Part Number (UDF)"]}
               </div>
 
               {/* Dimension */}
