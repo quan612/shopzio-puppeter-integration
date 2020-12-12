@@ -7,8 +7,8 @@ const CanadianTire = ({ items }) => {
   return (
     <>
       {items.map((item, index) => {
-        // const imagePath = item["ImagePath"];
-        // const correctPath = imagePath.replace("Z:", "http://127.0.0.1:8080");
+        const imagePath = item["ImagePath"];
+        const correctPath = imagePath.replace("Z:", "http://127.0.0.1:8080");
 
         return (
           <div
