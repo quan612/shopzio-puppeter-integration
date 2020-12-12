@@ -13,11 +13,11 @@ router.post("", fileUploadController, async (req, res, next) => {
     }
 
     let bstr = await utils.arrayBufferToBinary(req.file);
-    let jsonObj = utils.sheetToJson(bstr);
-
+    let jsonObj = await utils.sheetToJson(bstr);
+    console.log("Good before sending back");
+    // fs.writeFileSync("productsList.json", jsonObj);
     return res.status(200).json(jsonObj);
   } catch (error) {
-    console.log(error);
     return res.status(422).json({
       message: `Error at post route for file upload: ${error}`,
     });
