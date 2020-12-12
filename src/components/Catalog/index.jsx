@@ -45,7 +45,7 @@ const Catalog = () => {
       })
       .then((res) => {
         console.log(res.data);
-        // const { data } = res;
+        const { data } = res;
         toast.success("upload success");
         setItems((prev) => {
           return [...prev, ...data];
