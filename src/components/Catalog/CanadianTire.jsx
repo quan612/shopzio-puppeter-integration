@@ -2,13 +2,13 @@ import React from "react";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./style.css";
-
+const Barcode = require("react-barcode");
 const CanadianTire = ({ items }) => {
   return (
     <>
       {items.map((item, index) => {
-        // const imagePath = item["ImagePath"];
-        // const correctPath = imagePath.replace("Z:", "http://127.0.0.1:8080");
+        const imagePath = item["ImagePath"];
+        const correctPath = imagePath.replace("Z:", "http://127.0.0.1:8080");
 
         return (
           <div
@@ -18,12 +18,26 @@ const CanadianTire = ({ items }) => {
             <div className="flex flex-col h-full">
               <img
                 className=" object-scale-down h-30 block"
-                src="https://via.placeholder.com/150"
+                // src="https://via.placeholder.com/150"
+                src={correctPath}
                 alt="https://via.placeholder.com/150"
               />
-              <div className="text-sm font-base mt-2 text-center block part-number">
+              <div className="text-sm font-base mt-1 text-center block part-number">
                 {item["Part No"]}
               </div>
+
+              <div className="text-sm font-base mt-1 text-center block part-number">
+                <Barcode
+                  value={item["Part No"]}
+                  width={1}
+                  height={20}
+                  displayValue={false}
+                />
+              </div>
+
+              {/* <div className="text-small text-gray-700 mt-2 block text-center">
+                {item["Description"]}
+              </div> */}
 
               {/* Price */}
               <div className="flex flex-col text-center">
@@ -31,13 +45,15 @@ const CanadianTire = ({ items }) => {
                   <div className="text-base font-bold ">${item["Sell 01"]}</div>
                 </div>
               </div>
-              <div className="text-small text-gray-700 mt-2 block text-center">
-                {item["Description"]}
-              </div>
 
               {/* Canadian Tire Number */}
-              <div className="text-base text-gray-700 mt-2 block text-center">
-                CT#:{item["Canadian Tire Part Number (UDF)"]}
+              <div className="text-base text-gray-700 mt-1 block text-center">
+                CTC: {item["Canadian Tire Part Number (UDF)"]}
+              </div>
+
+              {/* On hand */}
+              <div className="text-xs text-gray-700 mt-1 block text-center">
+                On Hand: {item["On Hand"]}
               </div>
 
               {/* Dimension */}
