@@ -12,7 +12,7 @@ const CanadianTire = ({ items }) => {
 
         return (
           <div
-            className="inline-block justify-center max-w-1/4 min-w-1/4 h-card relative mb-6 ml-0.5 pl-1 pr-1"
+            className="inline-block justify-center max-w-1/3 min-w-1/3 h-card350 relative mb-3 ml-0.5 pl-1 pr-1"
             key={item["Part No"]}
           >
             <div className="flex flex-col h-full">
@@ -22,49 +22,72 @@ const CanadianTire = ({ items }) => {
                 src={correctPath}
                 alt="https://via.placeholder.com/150"
               />
-              <div className="text-sm font-base mt-1 text-center block part-number">
-                {item["Part No"]}
+
+              {/* UPC */}
+              <div className="text-xs font-base text-left">
+                <Barcode
+                  value={item["UPC"]}
+                  width={1}
+                  height={20}
+                  displayValue={true}
+                  fontSize={10}
+                />
               </div>
 
-              <div className="text-sm font-base mt-1 text-center block part-number">
+              {/* HL number */}
+              <div className="text-sm font-base text-left">
+                <span className="">HL#: </span>
+                <span className="font-bold"> {item["Part No"]}</span>
+              </div>
+
+              {/* Canadian Tire Barcode */}
+              {/* <div className="text-sm font-base text-left">
                 <Barcode
                   value={item["Part No"]}
                   width={1}
                   height={20}
-                  displayValue={false}
+                  displayValue={true}
+                  fontSize={10}
                 />
-              </div>
-
-              {/* <div className="text-small text-gray-700 mt-2 block text-center">
-                {item["Description"]}
               </div> */}
 
-              {/* Price */}
-              <div className="flex flex-col text-center">
-                <div className="text-center mt-0.5 ">
-                  <div className="text-base font-bold ">${item["Sell 01"]}</div>
-                </div>
-              </div>
-
               {/* Canadian Tire Number */}
-              <div className="text-base text-gray-700 mt-1 block text-center">
-                CTC: {item["Canadian Tire Part Number (UDF)"]}
+              <div className="text-xs block text-left">
+                <span>CTC: </span>
+                <span className="text-sm font-bold">
+                  {item["Canadian Tire Part Number (UDF)"]}
+                </span>
               </div>
 
-              {/* On hand */}
+              {/* Wholesale Price */}
+              <div className="inline-flex items-center text-center">
+                <span className="text-lg font-bold">${item["Sell 01"]}</span>
+              </div>
+
+              {/* Description */}
+              <div className="text-small max-w-85/100">
+                {item["Description"]}
+              </div>
+
+              {/* On hand 
               <div className="text-xs text-gray-700 mt-1 block text-center">
                 On Hand: {item["On Hand"]}
               </div>
+              */}
 
               {/* Dimension */}
-              <div className="flex justify-center align-items-center mt-0.5 ">
+              <div className="flex justify-center items-center text-center">
                 {item["Height (UDF)"] && (
                   <>
-                    <div className=" text-xs mr-2 ">{item["Height (UDF)"]}</div>
+                    <div className=" text-xs mr-2 ">
+                      {item["Height (UDF)"]}"
+                    </div>
                     <div className=" text-xs mr-2 ">x</div>
-                    <div className=" text-xs mr-2 ">{item["Length (UDF)"]}</div>
+                    <div className=" text-xs mr-2 ">
+                      {item["Length (UDF)"]}"
+                    </div>
                     <div className=" text-xs mr-2 ">x</div>
-                    <div className=" text-xs  ">{item["Width (UDF)"]}</div>
+                    <div className=" text-xs  ">{item["Width (UDF)"]}"</div>
                   </>
                 )}
               </div>

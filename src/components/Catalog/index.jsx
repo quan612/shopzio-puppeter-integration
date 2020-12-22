@@ -44,7 +44,6 @@ const Catalog = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
         const { data } = res;
         toast.success("upload success");
         setItems((prev) => {
@@ -61,11 +60,9 @@ const Catalog = () => {
     setShow(true);
   };
 
-  console.log(selectTemplate);
-  const onSelectTemplate = (selectOption) => {
+  console.log(items);
+  const onSelectTemplate = (selectOption) =>
     setSelectTemplate(selectOption.value);
-    console.log(`Option selected:`, selectOption);
-  };
 
   const onClear = () => {};
 
