@@ -60,7 +60,7 @@ const CanadianTire = ({ items }) => {
               </div>
 
               {/* Wholesale Price */}
-              <div className="inline-flex items-center text-center">
+              <div className="text-center">
                 <span className="text-lg font-bold">${item["Sell 01"]}</span>
               </div>
 
