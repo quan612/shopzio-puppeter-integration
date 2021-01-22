@@ -15,3 +15,9 @@ img {
 .part-number {
   font-family: "Open Sans";
 }
+
+.position-new {
+  position: absolute;
+  left: 0px;
+  color: #ffc107;
+}

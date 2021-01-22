@@ -3,13 +3,20 @@ import React from "react";
 import "react-toastify/dist/ReactToastify.css";
 import "./style.css";
 
-const ShowCatalog = ({ items }) => {
+const ShowCatalog = ({ items, customState }) => {
   return (
     <>
       {items.map((item, index) => {
         const imagePath = item["ImagePath"];
-        const correctPath = imagePath.replace("Z:", "http://127.0.0.1:8080");
+        //const correctPath = imagePath.replace("Z:", "http://127.0.0.1:8080");
 
+        if (
+          customState &&
+          customState.usOnly == true &&
+          item["Inventory Type"].includes("SC")
+        ) {
+          return;
+        }
         return (
           <div
             className="inline-block justify-center max-w-1/4 min-w-1/4 h-card relative mb-6 ml-0.5 pl-1 pr-1"
@@ -18,10 +25,14 @@ const ShowCatalog = ({ items }) => {
             <div className="flex flex-col h-full">
               <img
                 className=" object-scale-down h-30 block"
-                src={correctPath}
+                src="https://via.placeholder.com/150"
+                //src={correctPath}
                 alt="step3"
               />
               <div className="text-sm font-base mt-2 text-center block part-number">
+                {item["Inventory Type"].includes("SN") && (
+                  <span className="text-md font-bold position-new">New</span>
+                )}
                 {item["Part No"]}
               </div>
 
@@ -29,7 +40,7 @@ const ShowCatalog = ({ items }) => {
               {/** flex-1 */}
               <div className="flex flex-col text-center">
                 {/* Conditional render for P1 and P3 or just P1 */}
-                {item["Sell 03"] !== 0 ? (
+                {item["Sell 01"] < item["Sell 03"] !== 0 ? (
                   <>
                     <div className="text-center mt-0.5 flex flex-row justify-center align-center">
                       <div className=" text-sm font-normal">REG:</div>

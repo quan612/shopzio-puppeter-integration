@@ -13,12 +13,11 @@ import CanadianTire from "./CanadianTire";
 const options = [
   { value: "catalog", label: "Show Catalog" },
   { value: "canadianTire", label: "CanadianTire" },
+  { value: "canadianTire US Only", label: "CanadianTire US Only" },
   { value: "summarization", label: "Summarization" },
 ];
 
 const Catalog = () => {
-  // const [showCatalog, setShowCatalog] = useState(false);
-  // const [showCatalog, setShowCatalog] = useState(false);
   const [show, setShow] = useState(false);
   const [selectTemplate, setSelectTemplate] = useState(options[0].value);
   const [items, setItems] = useState([]);
@@ -26,11 +25,13 @@ const Catalog = () => {
     selectedFile: null,
   });
 
+  const [customState, setCustomState] = useState({
+    usOnly: null,
+  });
+
   const onSelect = (event) => {
     const file = event.target.files[0];
-    setCurrentState({
-      selectedFile: file,
-    });
+    setCurrentState({ ...currentState, selectedFile: file });
   };
 
   const onUpload = () => {
@@ -60,7 +61,17 @@ const Catalog = () => {
     setShow(true);
   };
 
-  console.log(items);
+  const onChangeCustomState = (evt) => {
+    const value =
+      evt.target.type === "checkbox" ? evt.target.checked : evt.target.value;
+    setCustomState({
+      ...customState,
+      [evt.target.name]: value,
+    });
+  };
+
+  console.log(customState);
+
   const onSelectTemplate = (selectOption) =>
     setSelectTemplate(selectOption.value);
 
@@ -89,36 +100,52 @@ const Catalog = () => {
           </div>
           <div className="form-group mt-2">
             <ToastContainer />
-            <button
-              type="button"
-              className="bg-blue-600 py-1 px-3 rounded text-white hover:opacity-80"
-              onClick={onUpload}
-            >
-              Upload
-            </button>
-            <button
-              type="button"
-              className="bg-blue-600 py-1 px-3 rounded text-white hover:opacity-80 ml-2 disabled:opacity-50 disabled:cursor-not-allowed"
-              onClick={() => onGenerateTemplate()}
-              disabled={!items.length > 0}
-            >
-              Generate
-            </button>
-            <button
-              type="button"
-              className="bg-red-600 py-1 px-3 rounded text-white hover:opacity-80 ml-2"
-              onClick={() => onClear()}
-            >
-              Clear Buffer
-            </button>
+            <div>
+              <button
+                type="button"
+                className="bg-blue-600 py-1 px-3 rounded text-white hover:opacity-80"
+                onClick={onUpload}
+              >
+                Upload
+              </button>
+              <button
+                type="button"
+                className="bg-blue-600 py-1 px-3 rounded text-white hover:opacity-80 ml-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                onClick={() => onGenerateTemplate()}
+                disabled={!items.length > 0}
+              >
+                Generate
+              </button>
+              <button
+                type="button"
+                className="bg-red-600 py-1 px-3 rounded text-white hover:opacity-80 ml-2"
+                onClick={() => onClear()}
+              >
+                Clear Buffer
+              </button>
+            </div>
+            <div>
+              <div className="form-group options selected">
+                <input
+                  id="US Only"
+                  name="usOnly"
+                  type="checkbox"
+                  className="form-control"
+                  onChange={onChangeCustomState}
+                />
+                <label htmlFor="US Only" className="p-2 ">
+                  US Only
+                </label>
+              </div>
+            </div>
           </div>
         </div>
         <div className=" page h-full relative">
           {show && selectTemplate === "catalog" && (
-            <ShowCatalog items={items} />
+            <ShowCatalog items={items} customState={customState} />
           )}
           {show && selectTemplate === "canadianTire" && (
-            <CanadianTire items={items} />
+            <CanadianTire items={items} customState={customState} />
           )}
           {show && selectTemplate === "summarization" && (
             <ShowCatalog items={items} />

@@ -1,14 +1,23 @@
 import React from "react";
-
 import "react-toastify/dist/ReactToastify.css";
 import "./style.css";
 const Barcode = require("react-barcode");
-const CanadianTire = ({ items }) => {
+
+const CanadianTire = ({ items, customState }) => {
+  console.log(customState);
   return (
     <>
       {items.map((item, index) => {
         const imagePath = item["ImagePath"];
         const correctPath = imagePath.replace("Z:", "http://127.0.0.1:8080");
+
+        if (
+          customState &&
+          customState.usOnly == true &&
+          item["Inventory Type"].includes("SC")
+        ) {
+          return;
+        }
 
         return (
           <div
@@ -18,8 +27,8 @@ const CanadianTire = ({ items }) => {
             <div className="flex flex-col h-full">
               <img
                 className=" object-scale-down h-30 block"
-                // src="https://via.placeholder.com/150"
-                src={correctPath}
+                src="https://via.placeholder.com/150"
+                // src={correctPath}
                 alt="https://via.placeholder.com/150"
               />
 
@@ -40,17 +49,6 @@ const CanadianTire = ({ items }) => {
                 <span className="font-bold"> {item["Part No"]}</span>
               </div>
 
-              {/* Canadian Tire Barcode */}
-              {/* <div className="text-sm font-base text-left">
-                <Barcode
-                  value={item["Part No"]}
-                  width={1}
-                  height={20}
-                  displayValue={true}
-                  fontSize={10}
-                />
-              </div> */}
-
               {/* Canadian Tire Number */}
               <div className="text-xs block text-left">
                 <span>CTC: </span>
@@ -61,7 +59,10 @@ const CanadianTire = ({ items }) => {
 
               {/* Wholesale Price */}
               <div className="text-center">
-                <span className="text-lg font-bold">${item["Sell 01"]}</span>
+                {item["Inventory Type"].includes("SN") && (
+                  <span className="text-lg font-bold position-new">New</span>
+                )}
+                <span className="text-lg font-bold ">${item["Sell 01"]}</span>
               </div>
 
               {/* Description */}
