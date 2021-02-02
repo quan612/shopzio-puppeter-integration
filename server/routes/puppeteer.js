@@ -12,6 +12,7 @@ router.post("", async (req, res, next) => {
     if (!rawData) return res.status(412).send({ error: "No file found" });
 
     let productsList = JSON.parse(rawData);
+
     let result = await puppeteer.puppeteerRun(productsList, options);
     fs.unlinkSync("productsList.json");
 

@@ -8,8 +8,8 @@ const ShowCatalog = ({ items, customState }) => {
     <>
       {items.map((item, index) => {
         const imagePath = item["ImagePath"];
-        //const correctPath = imagePath.replace("Z:", "http://127.0.0.1:8080");
-
+        const correctPath = imagePath.replace("Z:", "http://127.0.0.1:8080");
+        console.log(imagePath);
         if (
           customState &&
           customState.usOnly == true &&
@@ -40,7 +40,7 @@ const ShowCatalog = ({ items, customState }) => {
               {/** flex-1 */}
               <div className="flex flex-col text-center">
                 {/* Conditional render for P1 and P3 or just P1 */}
-                {item["Sell 01"] < item["Sell 03"] !== 0 ? (
+                {item["Sell 01"] < item["Sell 03"] ? (
                   <>
                     <div className="text-center mt-0.5 flex flex-row justify-center align-center">
                       <div className=" text-sm font-normal">REG:</div>

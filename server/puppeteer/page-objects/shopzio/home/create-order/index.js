@@ -9,7 +9,7 @@ class OrderPuppeteer {
   async goToCreateOrder(page) {
     let order = await page.$x(this.elements.orderTab);
     await order[0].click();
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 4000));
 
     let createOrder = await page.$x(this.elements.createOrderTab);
     await createOrder[0].click();
@@ -70,10 +70,17 @@ class OrderPuppeteer {
         product.hasOwnProperty("Order QTY")
       );
     }
+    if (productsList.length === 0) {
+      console.log("There is no product to work on here");
+      return;
+    }
 
     await page.evaluate(async () => {
-      let a = document.getElementById("btnAddNewRow");
-      a.click();
+      // let a = document.getElementById("btnAddNewRow");
+      // a.click();
+
+      buttons = document.querySelector("a[id='btnAddNewRow']");
+      await buttons.click();
     });
 
     await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -83,27 +90,46 @@ class OrderPuppeteer {
     for (let product of productsList) {
       try {
         // qty
-        await page.evaluate(async () => {
-          let qtyTextBox = document.getElementById("Qty");
-          if (product.hasOwnProperty("Order QTY"))
-            qtyTextBox.value = product["Order QTY"];
-          else qtyTextBox.value = "1";
-        });
+        if (product.hasOwnProperty("Order QTY")) {
+          let qty = product["Order QTY"].toString();
+          await page.click("input[id='Qty']", { clickCount: 3 });
+          await page.keyboard.press("Backspace");
+          await page.type("input[id='Qty']", qty, { delay: 1000 });
+        }
 
         //item id
-        productNumber = product["Part#"];
-        await page.type("input[id='ItemID']", productNumber, { delay: 500 });
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        await page.keyboard.press("ArrowDown");
-        let anotherDropDown = await page.$x("//ul[@id='ui-id-2']");
-        await anotherDropDown[0].click();
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        if (product.hasOwnProperty("PartNumber")) {
+          productNumber = product["PartNumber"];
+          await page.type("input[id='ItemID']", productNumber, { delay: 500 });
+          await new Promise((resolve) => setTimeout(resolve, 2000));
+          await page.keyboard.press("ArrowDown");
+          let itemDropDown = await page.$x("//ul[@id='ui-id-2']");
+          await itemDropDown[0].click();
+          await new Promise((resolve) => setTimeout(resolve, 2000));
+        }
+
+        // price override
+        let customPrice = product["Wholesale Price"].toString();
+        if (customPrice !== 0) {
+          await page.click("input[id='PriceOverride']", { clickCount: 3 });
+          await page.keyboard.press("Backspace");
+          await page.type("input[id='PriceOverride']", customPrice, {
+            delay: 1000,
+          });
+        } else {
+          await page.click("input[id='PriceOverride']", { clickCount: 3 });
+          await page.keyboard.press("Backspace");
+          await page.type("input[id='PriceOverride']", "0", {
+            delay: 1000,
+          });
+        }
 
         // click on add item
         let addItemButton = await page.$x("//button[@id='save']");
         addItemButton[0].click();
         await new Promise((resolve) => setTimeout(resolve, 2100));
       } catch (error) {
+        console.log(error);
         throw "Error at product: " + productNumber;
       }
     }
@@ -115,7 +141,7 @@ class OrderPuppeteer {
   }
 
   async getOrderNumber(page) {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    //await new Promise((resolve) => setTimeout(resolve, 6000));
     return await page.evaluate(async () => {
       let liOrder = document.querySelectorAll(
         "ul[class='breadcrumb breadcrumb-top'] li"

@@ -55,7 +55,9 @@ const ImportWrapper = ({
               Do not import items without qty
             </label>
           </div>
-          <div>Order Id that imported: {orderId}</div>
+          <div className="text-green-800 text-2xl">
+            Order Id that imported: {orderId}
+          </div>
           {error && (
             <label className="text-red-400">Error happens at: {error}</label>
           )}

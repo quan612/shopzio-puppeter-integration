@@ -8,20 +8,22 @@ const puppeteerRun = async (productsList, options) => {
       headless: true,
       defaultViewport: null,
       args: ["--start-maximized", "--window-size=1920,1040"],
+      //args: ["--start-maximized"],
     });
 
     const page = await browser.newPage();
 
-    // await page.setViewport({
-    //   width: 1366,
-    //   height: 768,
-    // });
+    await page.setViewport({
+      width: 1366,
+      height: 768,
+    });
 
     await page.goto("https://manage.repzio.com/");
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 5000));
 
     const loginController = new Login();
     await loginController.login(page);
+    // await new Promise((resolve) => setTimeout(resolve, 10000));
     await page.waitForNavigation();
 
     let orderController = new OrderPuppeteer();

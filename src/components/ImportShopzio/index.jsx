@@ -37,8 +37,8 @@ const ImportShopzio = () => {
       .post("http://localhost:8000/api/upload", data)
       .then((res) => {
         toast.success("upload success");
-        res.data.forEach((item) => console.log(item["Order QTY"]));
-        // console.log(res);
+        //res.data.forEach((item) => console.log(item["Order QTY"]));
+        console.log(res);
       })
       .catch((err) => {
         toast.error("upload fail");
@@ -54,6 +54,7 @@ const ImportShopzio = () => {
       })
       .catch((err) => {
         toast.error("dispatch fail");
+        console.log(err);
         if (err.response) setError(err.response.data);
       });
   };
