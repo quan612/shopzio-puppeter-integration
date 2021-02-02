@@ -27,8 +27,8 @@ const CanadianTire = ({ items, customState }) => {
             <div className="flex flex-col h-full">
               <img
                 className=" object-scale-down h-30 block"
-                src="https://via.placeholder.com/150"
-                // src={correctPath}
+                //src="https://via.placeholder.com/150"
+                src={correctPath}
                 alt="https://via.placeholder.com/150"
               />
 
@@ -59,9 +59,9 @@ const CanadianTire = ({ items, customState }) => {
 
               {/* Wholesale Price */}
               <div className="text-center">
-                {item["Inventory Type"].includes("SN") && (
+                {/* {item["Inventory Type"].includes("SN") && (
                   <span className="text-lg font-bold position-new">New</span>
-                )}
+                )} */}
                 <span className="text-lg font-bold ">${item["Sell 01"]}</span>
               </div>
 

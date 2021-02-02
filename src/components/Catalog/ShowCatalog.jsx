@@ -25,8 +25,8 @@ const ShowCatalog = ({ items, customState }) => {
             <div className="flex flex-col h-full">
               <img
                 className=" object-scale-down h-30 block"
-                src="https://via.placeholder.com/150"
-                //src={correctPath}
+                //src="https://via.placeholder.com/150"
+                src={correctPath}
                 alt="step3"
               />
               <div className="text-sm font-base mt-2 text-center block part-number">
