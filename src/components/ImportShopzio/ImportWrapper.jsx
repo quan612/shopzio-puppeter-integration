@@ -10,6 +10,7 @@ const ImportWrapper = ({
   onChangeCustomAttribute,
   orderId,
   error,
+  doing,
 }) => {
   console.log(error);
   return (
@@ -55,6 +56,11 @@ const ImportWrapper = ({
               Do not import items without qty
             </label>
           </div>
+          {doing && (
+            <div className="text-black-800 text-2xl">
+              Doing work in background.......
+            </div>
+          )}
           <div className="text-green-800 text-2xl">
             Order Id that imported: {orderId}
           </div>

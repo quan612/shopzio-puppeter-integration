@@ -15,6 +15,7 @@ const ImportShopzio = () => {
   });
 
   const [error, setError] = useState("");
+  const [doing, setDoing] = useState(false);
 
   React.useEffect(() => {
     return () => {
@@ -46,13 +47,17 @@ const ImportShopzio = () => {
   };
 
   const onDispatch = () => {
+    setDoing(true);
     axios
       .post("http://localhost:8000/api/puppeteer", currentState)
       .then((res) => {
+        setDoing(false);
         toast.success("upload success");
+        window.alert("Import Successfully!!!");
         setOrderId(res.data.orderId);
       })
       .catch((err) => {
+        setDoing(false);
         toast.error("dispatch fail");
         console.log(err);
         if (err.response) setError(err.response.data);
@@ -77,6 +82,7 @@ const ImportShopzio = () => {
       onChangeCustomAttribute={onChangeCustomAttribute}
       orderId={orderId}
       error={error}
+      doing={doing}
     />
     // <div className="container">
     //   <div className="row">
