@@ -89,14 +89,6 @@ class OrderPuppeteer {
     // loop is here
     for (let product of productsList) {
       try {
-        // qty
-        if (product.hasOwnProperty("Order QTY")) {
-          let qty = product["Order QTY"].toString();
-          await page.click("input[id='Qty']", { clickCount: 3 });
-          await page.keyboard.press("Backspace");
-          await page.type("input[id='Qty']", qty, { delay: 1000 });
-        }
-
         //item id
         if (product.hasOwnProperty("PartNumber")) {
           productNumber = product["PartNumber"];
@@ -106,6 +98,14 @@ class OrderPuppeteer {
           let itemDropDown = await page.$x("//ul[@id='ui-id-2']");
           await itemDropDown[0].click();
           await new Promise((resolve) => setTimeout(resolve, 2000));
+        }
+
+        // qty
+        if (product.hasOwnProperty("Order QTY")) {
+          let qty = product["Order QTY"].toString();
+          await page.click("input[id='Qty']", { clickCount: 3 });
+          await page.keyboard.press("Backspace");
+          await page.type("input[id='Qty']", qty, { delay: 1000 });
         }
 
         // price override

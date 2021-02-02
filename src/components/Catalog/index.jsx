@@ -13,7 +13,6 @@ import CanadianTire from "./CanadianTire";
 const options = [
   { value: "catalog", label: "Show Catalog" },
   { value: "canadianTire", label: "CanadianTire" },
-  { value: "canadianTire US Only", label: "CanadianTire US Only" },
   { value: "summarization", label: "Summarization" },
 ];
 
