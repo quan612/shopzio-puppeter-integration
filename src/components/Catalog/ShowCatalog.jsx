@@ -74,23 +74,17 @@ const ShowCatalog = ({ items, customState }) => {
                 {item["Description"]}
               </div>
 
-              <div>
-                {/* Dimension */}
-                <div className="flex justify-center align-items-center mt-0.5 ">
-                  {item["Height (UDF)"] && (
-                    <>
-                      <div className=" text-xs mr-2 ">
-                        {item["Height (UDF)"]}
-                      </div>
-                      <div className=" text-xs mr-2 ">x</div>
-                      <div className=" text-xs mr-2 ">
-                        {item["Length (UDF)"]}
-                      </div>
-                      <div className=" text-xs mr-2 ">x</div>
-                      <div className=" text-xs  ">{item["Width (UDF)"]}</div>
-                    </>
-                  )}
-                </div>
+              {/* Dimension */}
+              <div className="flex justify-center items-center text-center">
+                {item["Height (UDF)"] && (
+                  <>
+                    <div className="text-xs mr-2">{item["Length (UDF)"]}"</div>
+                    <div className="text-xs mr-2">x</div>
+                    <div className="text-xs mr-2">{item["Width (UDF)"]}"</div>
+                    <div className="text-xs mr-2">x</div>
+                    <div className="text-xs">{item["Height (UDF)"]}"</div>
+                  </>
+                )}
               </div>
             </div>
           </div>
