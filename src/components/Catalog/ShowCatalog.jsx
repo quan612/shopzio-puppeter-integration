@@ -78,10 +78,10 @@ const ShowCatalog = ({ items, customState }) => {
               <div className="flex justify-center items-center text-center">
                 {item["Height (UDF)"] && (
                   <>
-                    <div className="text-xs mr-2">{item["Length (UDF)"]}"</div>
-                    <div className="text-xs mr-2">x</div>
-                    <div className="text-xs mr-2">{item["Width (UDF)"]}"</div>
-                    <div className="text-xs mr-2">x</div>
+                    <div className="text-xs mr-1">{item["Length (UDF)"]}"</div>
+                    <div className="text-xs mr-1">x</div>
+                    <div className="text-xs mr-1">{item["Width (UDF)"]}"</div>
+                    <div className="text-xs mr-1">x</div>
                     <div className="text-xs">{item["Height (UDF)"]}"</div>
                   </>
                 )}
