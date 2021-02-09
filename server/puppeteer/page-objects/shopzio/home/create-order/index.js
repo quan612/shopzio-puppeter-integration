@@ -109,19 +109,21 @@ class OrderPuppeteer {
         }
 
         // price override
-        let customPrice = product["Wholesale Price"].toString();
-        if (customPrice !== 0) {
-          await page.click("input[id='PriceOverride']", { clickCount: 3 });
-          await page.keyboard.press("Backspace");
-          await page.type("input[id='PriceOverride']", customPrice, {
-            delay: 1000,
-          });
-        } else {
-          await page.click("input[id='PriceOverride']", { clickCount: 3 });
-          await page.keyboard.press("Backspace");
-          await page.type("input[id='PriceOverride']", "0", {
-            delay: 1000,
-          });
+        if (product.hasOwnProperty("Wholesale Price")) {
+          let customPrice = product["Wholesale Price"].toString();
+          if (customPrice !== 0) {
+            await page.click("input[id='PriceOverride']", { clickCount: 3 });
+            await page.keyboard.press("Backspace");
+            await page.type("input[id='PriceOverride']", customPrice, {
+              delay: 1000,
+            });
+          } else {
+            await page.click("input[id='PriceOverride']", { clickCount: 3 });
+            await page.keyboard.press("Backspace");
+            await page.type("input[id='PriceOverride']", "0", {
+              delay: 1000,
+            });
+          }
         }
 
         // click on add item
