@@ -10,9 +10,12 @@ import "./style.css";
 import ShowCatalog from "./ShowCatalog";
 import CanadianTire from "./CanadianTire";
 
+import Custom from "./Custom";
+
 const options = [
   { value: "catalog", label: "Show Catalog" },
   { value: "canadianTire", label: "CanadianTire" },
+  { value: "custom", label: "custom" },
   { value: "summarization", label: "Summarization" },
 ];
 
@@ -146,6 +149,7 @@ const Catalog = () => {
           {show && selectTemplate === "canadianTire" && (
             <CanadianTire items={items} customState={customState} />
           )}
+          {show && selectTemplate === "custom" && <Custom items={items} />}
           {show && selectTemplate === "summarization" && (
             <ShowCatalog items={items} />
           )}
