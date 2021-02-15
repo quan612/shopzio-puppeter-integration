@@ -8,8 +8,10 @@ const Custom = ({ items, customState }) => {
     <>
       {items.map((item, index) => {
         const imagePath = item["ImagePath"];
-        const correctPath = imagePath.replace("Z:", "http://127.0.0.1:8080");
-        console.log(imagePath);
+        let correctPath;
+        if (imagePath)
+          correctPath = imagePath.replace("Z:", "http://127.0.0.1:8080");
+        console.log(correctPath);
         if (
           customState &&
           customState.usOnly == true &&
@@ -25,8 +27,8 @@ const Custom = ({ items, customState }) => {
             <div className="flex flex-col h-full">
               <img
                 className=" object-scale-down h-30 block"
-                // src="https://via.placeholder.com/150"
-                src={correctPath}
+                src="https://via.placeholder.com/150"
+                //src={correctPath}
                 alt="step3"
               />
               <div className="text-sm font-base mt-1 text-center block part-number">
@@ -38,20 +40,21 @@ const Custom = ({ items, customState }) => {
 
               {/* Price */}
               <div className="text-center mt-1.5">
-                {/* Conditional render for P1 and P3 or just P1 */}
                 {item["Sell 01"] < item["Sell 03"] ? (
                   <>
                     <div className=" flex flex-row justify-center align-center text-sm font-normal">
                       <div>REG:</div>
                       <div className="ml-1">${item["Sell 03"]}</div>
                     </div>
-                    <div className="flex flex-row justify-center align-center text-base font-extrabold text-red-700">
+                    <div className="flex flex-row justify-center align-center text-base font-normal text-red-700">
                       <div>SALE:</div>
                       <div className="ml-1">${item["Sell 01"]}</div>
                     </div>
                   </>
                 ) : (
-                  <div className="text-base font-bold ">${item["Sell 01"]}</div>
+                  <div className="text-base font-normal ">
+                    ${item["Sell 01"]}
+                  </div>
                 )}
               </div>
 
@@ -60,23 +63,29 @@ const Custom = ({ items, customState }) => {
               </div>
 
               {/* UPC */}
-              <div className="text-sm text-left text-gray-700 ">
-                UPC: {item["UPC"]}
-              </div>
+              {item["UPC"] !== 0 && (
+                <div className="text-small text-left text-gray-700 ">
+                  UPC: {item["UPC"]}
+                </div>
+              )}
 
               {/* Dimension */}
               <div className="flex justify-center items-center text-center">
-                {item["Height (UDF)"] && (
-                  <>
-                    <div className="text-xs mr-0.5">
-                      {item["Length (UDF)"]}"
-                    </div>
-                    <div className="text-xs mr-0.5">x</div>
-                    <div className="text-xs mr-0.5">{item["Width (UDF)"]}"</div>
-                    <div className="text-xs mr-0.5">x</div>
-                    <div className="text-xs">{item["Height (UDF)"]}"</div>
-                  </>
-                )}
+                {item["Height (UDF)"] !== 0 &&
+                  item["Length (UDF)"] !== 0 &&
+                  item["Width (UDF)"] !== 0 && (
+                    <>
+                      <div className="text-xs mr-0.5">
+                        {item["Length (UDF)"]}"
+                      </div>
+                      <div className="text-xs mr-0.5">x</div>
+                      <div className="text-xs mr-0.5">
+                        {item["Width (UDF)"]}"
+                      </div>
+                      <div className="text-xs mr-0.5">x</div>
+                      <div className="text-xs">{item["Height (UDF)"]}"</div>
+                    </>
+                  )}
               </div>
             </div>
           </div>
